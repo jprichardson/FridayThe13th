@@ -71,11 +71,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\example1.json" />
-    <None Include="Resources\example2.json" />
-    <None Include="Resources\example3.json" />
-    <None Include="Resources\example4.json" />
-    <None Include="Resources\example5.json" />
+    <None Include="Resources\json_example1.json" />
+    <None Include="Resources\json_example2.json" />
+    <None Include="Resources\json_example3.json" />
+    <None Include="Resources\json_example4.json" />
+    <None Include="Resources\json_example5.json" />
+    <None Include="Resources\json_strings.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -118,19 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="example1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\example1.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="json_example1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_example1.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="example2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\example2.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="json_example2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_example2.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="example3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\example3.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="json_example3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_example3.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="example4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\example4.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="json_example4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_example4.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="example5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\example5.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="json_example5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_example5.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="json_strings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_strings.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

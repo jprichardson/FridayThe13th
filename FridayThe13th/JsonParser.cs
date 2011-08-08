@@ -2,16 +2,182 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Dynamic;
 
 namespace FridayThe13th {
 	public class JsonParser {
 
-		public JsonParser(string jsonText) {
+		private int _line = 0;
+		private int _column = 0;
+
+		private string _jsonText = "";
+		private int _index = 0;
+		private StringBuilder _sb = new StringBuilder();
+
+		public JsonParser() {
 
 		}
 
+		public JsonParser(string jsonText) {
+			_jsonText = jsonText;
+		}
+
+		public dynamic Parse(string json) {
+			Reset();
+			_jsonText = json;
+			return ParseValue();
+		}
+
 		public dynamic Parse() {
-			return null;
+			return ParseValue();
+		}
+
+		public void Reset() {
+			_index = 0; _line = 0; _column = 0;
+			_jsonText = "";
+		}
+
+		protected dynamic ParseValue() {
+			ReadWhitespace();
+
+			switch (Peek()) {
+				case '{': return ParseObject();
+				case '"': return ParseString();
+				case -1: throw ParseError("Unknown parsing error. Premature end of file.");
+				default: throw ParseError("Unrecognized JSON character token.");
+			}
+		}
+
+		protected dynamic ParseObject() {
+			Read(); //read first {
+			ReadWhitespace();
+
+			var obj = new ExpandoObject();
+			var dict = (IDictionary<string, dynamic>)obj;
+
+			var doRead = true;
+			while (doRead) {
+				switch (Peek()) {
+					case -1: throw ParseError("Unterminated object before end of file.");
+					case ',':
+						Read();
+						break;
+					case '}':
+						Read();
+						doRead = false;
+						break;
+					case '"':
+						var key = ParseString();
+						ReadWhitespace();
+						ReadExpect(':');
+						ReadWhitespace();
+						var val = ParseValue();
+						dict[key] = val;
+						break;
+					default:
+						ReadWhitespace();
+						break;
+				}
+			}
+
+			return obj;
+		}
+
+		protected string ParseString() {
+			Read(); //read first "
+			_sb.Clear();
+
+			bool complete = false;
+			while (!complete) {
+				var c = Read();
+				switch (c) {
+					case -1: throw ParseError("Unterminated string before end of file.");
+					case '"': complete = true; break;
+					case '\\':
+						var nc = Read();
+						switch (nc) {
+							case '"':
+							case '\\':
+							case '/':
+								_sb.Append((char)nc);
+								break;
+							case 'b':
+								_sb.Append('\b');
+								break;
+							case 'f':
+								_sb.Append('\f');
+								break;
+							case 'n':
+								_sb.Append('\n');
+								break;
+							case 'r':
+								_sb.Append('\r');
+								break;
+							case 't':
+								_sb.Append('\t');
+								break;
+							case 'u':
+								throw ParseError("Unicode handling not implemented yet.");
+						}
+						break;
+					default:
+						_sb.Append((char)c);
+						break;
+				}
+			}
+
+			return _sb.ToString();
+		}
+
+		protected int Peek() {
+			if (_index == _jsonText.Length)
+				return -1; //EOF
+			else
+				return _jsonText[_index];
+		}
+
+		protected int Read() {
+			if (_index == _jsonText.Length)
+				return -1;
+			else {
+				int c = _jsonText[_index++];
+				if (c == '\n') {
+					_line++;
+					_column = 0;
+				} else
+					_column++;
+
+				return c;
+			}
+		}
+
+		protected void ReadExpect(char c) {
+			var expect = Read();
+			if (expect == -1)
+				throw ParseError(string.Format("Expected {0} but is at the end of the string.", c));
+			else
+				if (expect != c)
+					throw ParseError(string.Format("Expected {0} but received {1}.", c, expect));
+		}
+
+		protected void ReadWhitespace() {
+			bool doRead = true;
+			while (doRead) {
+				switch (Peek()) {
+					case ' ':
+					case '\t':
+					case '\r':
+					case '\n':
+						Read();
+						break;
+					default: doRead = false; break;
+				}
+			} 
+		}
+
+		protected Exception ParseError(string msg) {
+			return new Exception(string.Format("{0} ({1},{2})", msg, _line, _column));
 		}
 
 	}

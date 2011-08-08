@@ -78,9 +78,9 @@ namespace TestFridayThe13th.Properties {
         ///						&quot;GlossSeeAlso&quot;: [&quot;GML&quot;, &quot;XML&quot;]
         ///              [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string example1 {
+        internal static string json_example1 {
             get {
-                return ResourceManager.GetString("example1", resourceCulture);
+                return ResourceManager.GetString("json_example1", resourceCulture);
             }
         }
         
@@ -89,7 +89,7 @@ namespace TestFridayThe13th.Properties {
         ///  &quot;id&quot;: &quot;file&quot;,
         ///	&quot;value&quot;: &quot;File&quot;,
         ///  &quot;popup&quot;: {
-        ///    &quot;menuitem&quot;: [
+        ///    &quot;menuitems&quot;: [
         ///      {&quot;value&quot;: &quot;New&quot;, &quot;onclick&quot;: &quot;CreateNewDoc()&quot;},
         ///      {&quot;value&quot;: &quot;Open&quot;, &quot;onclick&quot;: &quot;OpenDoc()&quot;},
         ///      {&quot;value&quot;: &quot;Close&quot;, &quot;onclick&quot;: &quot;CloseDoc()&quot;}
@@ -97,9 +97,9 @@ namespace TestFridayThe13th.Properties {
         ///  }
         ///}}.
         /// </summary>
-        internal static string example2 {
+        internal static string json_example2 {
             get {
-                return ResourceManager.GetString("example2", resourceCulture);
+                return ResourceManager.GetString("json_example2", resourceCulture);
             }
         }
         
@@ -127,9 +127,9 @@ namespace TestFridayThe13th.Properties {
         ///        &quot;hOffset&quot;: 250,
         ///        &quot;vOffset&quot;: [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string example3 {
+        internal static string json_example3 {
             get {
-                return ResourceManager.GetString("example3", resourceCulture);
+                return ResourceManager.GetString("json_example3", resourceCulture);
             }
         }
         
@@ -148,9 +148,9 @@ namespace TestFridayThe13th.Properties {
         ///        &quot;templateProcessorClass&quot;: &quot;org.cofax.WysiwygTemplate&quot;,
         ///        &quot;templa [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string example4 {
+        internal static string json_example4 {
             get {
-                return ResourceManager.GetString("example4", resourceCulture);
+                return ResourceManager.GetString("json_example4", resourceCulture);
             }
         }
         
@@ -172,9 +172,21 @@ namespace TestFridayThe13th.Properties {
         ///        {&quot;id&quot;: &quot;Copy&quot;},
         ///        {&quot;id&quot;: &quot;CopyAgain&quot;, &quot;labe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string example5 {
+        internal static string json_example5 {
             get {
-                return ResourceManager.GetString("example5", resourceCulture);
+                return ResourceManager.GetString("json_example5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///   &quot;a&quot;: &quot;you are a \&quot;silly\&quot; person.&quot;,
+        ///   &quot;b&quot;: &quot;my name is &apos;JP&apos;&quot;
+        ///}.
+        /// </summary>
+        internal static string json_strings {
+            get {
+                return ResourceManager.GetString("json_strings", resourceCulture);
             }
         }
     }
