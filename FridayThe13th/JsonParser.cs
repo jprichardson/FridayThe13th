@@ -116,14 +116,16 @@ namespace FridayThe13th {
 			Read(); //read first {
 			ReadWhitespace();
 
-			dynamic obj = new ExpandoObject();
+			dynamic obj = new JsonObject();
 			
-			var dict = (IDictionary<string, dynamic>)obj;
+			/*var dict = (IDictionary<string, dynamic>)obj;
 			Func<bool> f = () => {
 				return dict.Keys.Count == 1; //created method IsEmpty() is a key as well
 			};
 			obj.IsEmpty = f;
 
+			
+			*/
 			var doRead = true;
 			while (doRead) {
 				switch (Peek()) {
@@ -141,7 +143,7 @@ namespace FridayThe13th {
 						ReadExpect(':');
 						ReadWhitespace();
 						var val = ParseValue();
-						dict[key] = val;
+						obj[key] = val;
 						break;
 					default:
 						ReadWhitespace();

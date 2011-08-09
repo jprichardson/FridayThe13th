@@ -73,10 +73,10 @@ namespace TestFridayThe13th
 
 			obj = jsp.Parse("{\"msg\":\"My name is \\\"JP\\\" ok?\"}");
 			Assert.AreEqual("My name is \"JP\" ok?", obj.msg);
-			Assert.IsFalse(obj.IsEmpty());
+			Assert.IsFalse(obj.IsEmpty);
 
 			obj = jsp.Parse("    { \r\n    }\t");
-			Assert.IsTrue(obj.IsEmpty());
+			Assert.IsTrue(obj.IsEmpty);
 		}
 
 		[TestMethod()]
@@ -135,6 +135,48 @@ namespace TestFridayThe13th
 			Assert.AreEqual("CreateNewDoc()", res.menu.popup.menuitems[0].onclick);
 			Assert.AreEqual("OpenDoc()", res.menu.popup.menuitems[1].onclick);
 			Assert.AreEqual("CloseDoc()", res.menu.popup.menuitems[2].onclick);
+		}
+
+		[TestMethod()]
+		public void Parse1Test() {
+			var jsp = new JsonParser();
+
+			dynamic res = jsp.Parse(Properties.Resources.json_example1);
+
+			Assert.AreEqual(res.glossary.title, "example glossary");
+			Assert.AreEqual(res.glossary.GlossDiv.title, "S");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.ID, "SGML");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.SortAs, "SGML");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.GlossTerm, "Standard Generalized Markup Language");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.Abbrev, "ISO 8879:1986");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para, "A meta-markup language, used to create markup languages such as DocBook.");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0], "GML");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[1], "XML");
+			Assert.AreEqual(res.glossary.GlossDiv.GlossList.GlossEntry.GlossSee, "markup");
+		}
+
+		[TestMethod()]
+		public void Parse3Test() {
+			var jsp = new JsonParser();
+
+			dynamic res = jsp.Parse(Properties.Resources.json_example3);
+
+			Assert.AreEqual("on", res.widget.debug);
+			Assert.AreEqual("Sample Konfabulator Widget", res.widget.window.title);
+			Assert.AreEqual(500.0, res.widget.window.width);
+			Assert.AreEqual(600, res.widget.window.height);
+		}
+
+		[TestMethod()]
+		public void Parse4Test() {
+			var jsp = new JsonParser();
+
+			dynamic res = jsp.Parse(Properties.Resources.json_example4);
+
+			Assert.AreEqual("org.cofax.cds.CDSServlet", res["web-app"].servlet[0]["servlet-class"]);
+			Assert.AreEqual("ksm@pobox.com", res["web-app"].servlet[0]["init-param"]["configGlossary:adminEmail"]);
+			Assert.AreEqual(500.0, res["web-app"].servlet[0]["init-param"].maxUrlLength);
+			Assert.AreEqual("/WEB-INF/tlds/cofax.tld", res["web-app"].taglib["taglib-location"]);
 		}
 	}
 }

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="fastJSON.cs" />
     <Compile Include="FirstJson.cs" />
+    <Compile Include="JsonObject.cs" />
     <Compile Include="JsonParser.cs" />
     <Compile Include="XJsonParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
