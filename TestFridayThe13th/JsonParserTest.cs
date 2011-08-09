@@ -178,5 +178,24 @@ namespace TestFridayThe13th
 			Assert.AreEqual(500.0, res["web-app"].servlet[0]["init-param"].maxUrlLength);
 			Assert.AreEqual("/WEB-INF/tlds/cofax.tld", res["web-app"].taglib["taglib-location"]);
 		}
+
+		[TestMethod()]
+		public void Parse5Test() {
+			var jsp = new JsonParser();
+
+			dynamic res = jsp.Parse(Properties.Resources.json_example5);
+
+			Assert.AreEqual(8, res.Count);
+			Assert.AreEqual("Open", res[0].id);
+			Assert.AreEqual("OpenNew", res[1].id); Assert.AreEqual("Open New", res[1]["true"]);
+			Assert.AreEqual(null, res[2]);
+			Assert.AreEqual(false, res[3].id);
+			Assert.AreEqual(true, res[4].label);
+			Assert.AreEqual(true, res[5]);
+			Assert.AreEqual("Mute", res[6].id);
+			Assert.AreEqual(null, res[7]);
+		}
+
+		
 	}
 }
