@@ -16,21 +16,11 @@ namespace FridayThe13th {
 		private int _index = 0;
 		private StringBuilder _sb = new StringBuilder();
 
-		public JsonParser() {
-
-		}
-
-		public JsonParser(string jsonText) {
-			_jsonText = jsonText;
-		}
+		public JsonParser() { }
 
 		public dynamic Parse(string json) {
 			Reset();
 			_jsonText = json;
-			return ParseValue();
-		}
-
-		public dynamic Parse() {
 			return ParseValue();
 		}
 

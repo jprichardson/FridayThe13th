@@ -121,14 +121,11 @@ namespace TestFridayThe13th
 			Assert.IsNull(jsp.Parse("null"));
 		}
 
-		/*[TestMethod()]
+		[TestMethod()]
 		public void Parse2Test() {
-			var jsp = new JsonParser(Properties.Resources.example2);
+			var jsp = new JsonParser();
 
-			dynamic res = jsp.Parse();
-
-			var fj = new fastJSON("{\"hello\": \"poo\"");
-			var o = fj.Decode();
+			dynamic res = jsp.Parse(Properties.Resources.json_example2);
 
 			Assert.AreEqual("file", res.menu.id);
 			Assert.AreEqual("File", res.menu.value);
@@ -138,6 +135,6 @@ namespace TestFridayThe13th
 			Assert.AreEqual("CreateNewDoc()", res.menu.popup.menuitems[0].onclick);
 			Assert.AreEqual("OpenDoc()", res.menu.popup.menuitems[1].onclick);
 			Assert.AreEqual("CloseDoc()", res.menu.popup.menuitems[2].onclick);
-		}*/
+		}
 	}
 }
