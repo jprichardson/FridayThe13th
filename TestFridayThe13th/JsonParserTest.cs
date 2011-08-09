@@ -196,6 +196,16 @@ namespace TestFridayThe13th
 			Assert.AreEqual(null, res[7]);
 		}
 
+		[TestMethod()]
+		public void SimpleUnicodeParseTest() {
+			var jsp = new JsonParser();
+
+			var res = jsp.Parse(Properties.Resources.json_unicode);
+
+			Assert.AreEqual("÷", res.div);
+			Assert.AreEqual("Σ", res.sigma);
+			Assert.AreEqual("လ", res.inf);
+		}
 		
 	}
 }

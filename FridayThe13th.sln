@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridayThe13thSL", "FridayThe13thSL\FridayThe13thSL.csproj", "{13ED57E0-C966-4433-A7BC-6C924801D26C}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FridayThe13th.vsmdi
@@ -29,6 +31,10 @@ Global
 		{3A0CCB1D-02BA-455C-88E8-2C7424915967}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A0CCB1D-02BA-455C-88E8-2C7424915967}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A0CCB1D-02BA-455C-88E8-2C7424915967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

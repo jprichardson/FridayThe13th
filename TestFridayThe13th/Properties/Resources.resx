@@ -136,4 +136,7 @@
   <data name="json_strings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\json_strings.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="json_unicode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\json_unicode.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

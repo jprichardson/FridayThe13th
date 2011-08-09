@@ -71,12 +71,12 @@ namespace TestFridayThe13th.Properties {
         ///                    &quot;ID&quot;: &quot;SGML&quot;,
         ///					&quot;SortAs&quot;: &quot;SGML&quot;,
         ///					&quot;GlossTerm&quot;: &quot;Standard Generalized Markup Language&quot;,
-        ///					&quot;Acronym&quot;: &quot;SGML&quot;,
         ///					&quot;Abbrev&quot;: &quot;ISO 8879:1986&quot;,
         ///					&quot;GlossDef&quot;: {
         ///                        &quot;para&quot;: &quot;A meta-markup language, used to create markup languages such as DocBook.&quot;,
         ///						&quot;GlossSeeAlso&quot;: [&quot;GML&quot;, &quot;XML&quot;]
-        ///              [rest of string was truncated]&quot;;.
+        ///                    },
+        ///					&quot;GlossSee [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string json_example1 {
             get {
@@ -108,24 +108,10 @@ namespace TestFridayThe13th.Properties {
         ///    &quot;debug&quot;: &quot;on&quot;,
         ///    &quot;window&quot;: {
         ///        &quot;title&quot;: &quot;Sample Konfabulator Widget&quot;,
-        ///        &quot;name&quot;: &quot;main_window&quot;,
         ///        &quot;width&quot;: 500,
-        ///        &quot;height&quot;: 500
-        ///    },
-        ///    &quot;image&quot;: { 
-        ///        &quot;src&quot;: &quot;Images/Sun.png&quot;,
-        ///        &quot;name&quot;: &quot;sun1&quot;,
-        ///        &quot;hOffset&quot;: 250,
-        ///        &quot;vOffset&quot;: 250,
-        ///        &quot;alignment&quot;: &quot;center&quot;
-        ///    },
-        ///    &quot;text&quot;: {
-        ///        &quot;data&quot;: &quot;Click Here&quot;,
-        ///        &quot;size&quot;: 36,
-        ///        &quot;style&quot;: &quot;bold&quot;,
-        ///        &quot;name&quot;: &quot;text1&quot;,
-        ///        &quot;hOffset&quot;: 250,
-        ///        &quot;vOffset&quot;: [rest of string was truncated]&quot;;.
+        ///        &quot;height&quot;: 600
+        ///    }
+        ///}}    .
         /// </summary>
         internal static string json_example3 {
             get {
@@ -137,16 +123,21 @@ namespace TestFridayThe13th.Properties {
         ///   Looks up a localized string similar to {&quot;web-app&quot;: {
         ///  &quot;servlet&quot;: [   
         ///    {
-        ///      &quot;servlet-name&quot;: &quot;cofaxCDS&quot;,
         ///      &quot;servlet-class&quot;: &quot;org.cofax.cds.CDSServlet&quot;,
         ///      &quot;init-param&quot;: {
-        ///        &quot;configGlossary:installationAt&quot;: &quot;Philadelphia, PA&quot;,
         ///        &quot;configGlossary:adminEmail&quot;: &quot;ksm@pobox.com&quot;,
-        ///        &quot;configGlossary:poweredBy&quot;: &quot;Cofax&quot;,
-        ///        &quot;configGlossary:poweredByIcon&quot;: &quot;/images/cofax.gif&quot;,
-        ///        &quot;configGlossary:staticPath&quot;: &quot;/content/static&quot;,
-        ///        &quot;templateProcessorClass&quot;: &quot;org.cofax.WysiwygTemplate&quot;,
-        ///        &quot;templa [rest of string was truncated]&quot;;.
+        ///        &quot;maxUrlLength&quot;: 500}},
+        ///    {
+        ///      &quot;servlet-name&quot;: &quot;cofaxEmail&quot;,
+        ///      &quot;init-param&quot;: {
+        ///      &quot;mailHost&quot;: &quot;mail1&quot;,
+        ///      &quot;mailHostOverride&quot;: &quot;mail2&quot;}},
+        ///    {
+        ///      &quot;servlet-name&quot;: &quot;fileServlet&quot;,
+        ///      &quot;servlet-class&quot;: &quot;org.cofax.cds.FileServlet&quot;},
+        ///    {
+        ///      &quot;servlet-name&quot;: &quot;cofaxTools&quot;,
+        ///      &quot;servlet-class&quot;: &quot;org.cofax [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string json_example4 {
             get {
@@ -157,20 +148,14 @@ namespace TestFridayThe13th.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///        {&quot;id&quot;: &quot;Open&quot;},
-        ///        {&quot;id&quot;: &quot;OpenNew&quot;, &quot;label&quot;: &quot;Open New&quot;},
+        ///        {&quot;id&quot;: &quot;OpenNew&quot;, &quot;true&quot;: &quot;Open New&quot;},
         ///        null,
-        ///        {&quot;id&quot;: &quot;ZoomIn&quot;, &quot;label&quot;: &quot;Zoom In&quot;},
-        ///        {&quot;id&quot;: &quot;ZoomOut&quot;, &quot;label&quot;: &quot;Zoom Out&quot;},
-        ///        {&quot;id&quot;: &quot;OriginalView&quot;, &quot;label&quot;: &quot;Original View&quot;},
-        ///        null,
-        ///        {&quot;id&quot;: &quot;Quality&quot;},
-        ///        {&quot;id&quot;: &quot;Pause&quot;},
+        ///        {&quot;id&quot;: false},
+        ///        {&quot;id&quot;: &quot;ZoomOut&quot;, &quot;label&quot;: true},
+        ///        true,
         ///        {&quot;id&quot;: &quot;Mute&quot;},
-        ///        null,
-        ///        {&quot;id&quot;: &quot;Find&quot;, &quot;label&quot;: &quot;Find...&quot;},
-        ///        {&quot;id&quot;: &quot;FindAgain&quot;, &quot;label&quot;: &quot;Find Again&quot;},
-        ///        {&quot;id&quot;: &quot;Copy&quot;},
-        ///        {&quot;id&quot;: &quot;CopyAgain&quot;, &quot;labe [rest of string was truncated]&quot;;.
+        ///        null
+        ///  ].
         /// </summary>
         internal static string json_example5 {
             get {
@@ -182,11 +167,21 @@ namespace TestFridayThe13th.Properties {
         ///   Looks up a localized string similar to {
         ///   &quot;a&quot;: &quot;you are a \&quot;silly\&quot; person.&quot;,
         ///   &quot;b&quot;: &quot;my name is &apos;JP&apos;&quot;
+        ///   &quot;c&quot;: &quot;testing a new \n line.&quot;
         ///}.
         /// </summary>
         internal static string json_strings {
             get {
                 return ResourceManager.GetString("json_strings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [&quot;\u00f7&quot;].
+        /// </summary>
+        internal static string json_unicode {
+            get {
+                return ResourceManager.GetString("json_unicode", resourceCulture);
             }
         }
     }

@@ -188,7 +188,20 @@ namespace FridayThe13th {
 								_sb.Append('\t');
 								break;
 							case 'u':
-								throw ParseError("Unicode handling not implemented yet.");
+								ushort cp = 0;
+								for (int i = 0; i < 4; i++) {
+									if ((c = Read()) < 0)
+										throw ParseError("Incomplete unicode character escape literal");
+									cp *= 16;
+									if ('0' <= c && c <= '9')
+										cp += (ushort)(c - '0');
+									if ('A' <= c && c <= 'F')
+										cp += (ushort)(c - 'A' + 10);
+									if ('a' <= c && c <= 'f')
+										cp += (ushort)(c - 'a' + 10);
+								}
+								_sb.Append((char)cp);
+								break;
 						}
 						break;
 					default:
