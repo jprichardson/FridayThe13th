@@ -41,6 +41,28 @@ namespace TestFridayThe13th
 		}*/
 
 		[TestMethod()]
+		public void SimpleArrayParseTest() {
+			var jsp = new JsonParser();
+			dynamic arr = jsp.Parse("[\"a\", \"b\", \"c\"]");
+			Assert.AreEqual(3, arr.Count);
+			Assert.AreEqual("a", arr[0]);
+			Assert.AreEqual("b", arr[1]);
+			Assert.AreEqual("c", arr[2]);
+
+			arr = jsp.Parse("[\"a\"]");
+			Assert.AreEqual(1, arr.Count);
+			Assert.AreEqual("a", arr[0]);
+
+			arr = jsp.Parse("   \t\n[\"a  \",    \"b\", \t\"c\"]\t");
+			Assert.AreEqual(3, arr.Count);
+			Assert.AreEqual("a  ", arr[0]);
+			Assert.AreEqual("b", arr[1]);
+
+			arr = jsp.Parse("\t\n\r [ \r\n\t\t     ]   \n\t");
+			Assert.AreEqual(0, arr.Count);
+		}
+
+		[TestMethod()]
 		public void SimpleObjectParseTest() {
 			var jsp = new JsonParser();
 			dynamic obj = jsp.Parse("{\"name\": \"JP\"}");
@@ -51,6 +73,10 @@ namespace TestFridayThe13th
 
 			obj = jsp.Parse("{\"msg\":\"My name is \\\"JP\\\" ok?\"}");
 			Assert.AreEqual("My name is \"JP\" ok?", obj.msg);
+			Assert.IsFalse(obj.IsEmpty());
+
+			obj = jsp.Parse("    { \r\n    }\t");
+			Assert.IsTrue(obj.IsEmpty());
 		}
 
 		[TestMethod()]
@@ -62,6 +88,7 @@ namespace TestFridayThe13th
 
 			Assert.AreEqual("you are a \"silly\" person.", obj.a);
 			Assert.AreEqual("my name is 'JP'", obj.b);
+			Assert.AreEqual("testing a new \n line.", obj.c);
 			
 		}
 

@@ -38,14 +38,52 @@ namespace FridayThe13th {
 			_jsonText = "";
 		}
 
+		protected List<dynamic> ParseArray() {
+			Read(); //read first [
+
+			var list = new List<dynamic>();
+
+			var doRead = true;
+			while (doRead) {
+				ReadWhitespace();
+				switch (Peek()) {
+					case -1: throw ParseError("Unterminated array before end of json string.");
+					case ',':
+						Read();
+						break;
+					case ']':
+						Read();
+						doRead = false;
+						break;
+					default:
+						var val = ParseValue();
+						list.Add(val);
+						break;
+				}
+			}
+
+			return list;
+		}
+
+		protected dynamic ParseNumber() {
+			return 0;
+		}
+
 		protected dynamic ParseValue() {
 			ReadWhitespace();
 
-			switch (Peek()) {
+			var c = Peek();
+			switch (c) {
+				case -1: throw ParseError("Unknown parsing error. Premature end of json string.");
 				case '{': return ParseObject();
 				case '"': return ParseString();
-				case -1: throw ParseError("Unknown parsing error. Premature end of file.");
-				default: throw ParseError("Unrecognized JSON character token.");
+				case '[': return ParseArray();
+				case '-': return ParseNumber();
+				default:
+					if (c >= '0' && c <= '9')
+						return ParseNumber();
+					else
+						throw ParseError("Unrecognized JSON character token.");
 			}
 		}
 
@@ -53,13 +91,18 @@ namespace FridayThe13th {
 			Read(); //read first {
 			ReadWhitespace();
 
-			var obj = new ExpandoObject();
+			dynamic obj = new ExpandoObject();
+			
 			var dict = (IDictionary<string, dynamic>)obj;
+			Func<bool> f = () => {
+				return dict.Keys.Count == 1; //created method IsEmpty() is a key as well
+			};
+			obj.IsEmpty = f;
 
 			var doRead = true;
 			while (doRead) {
 				switch (Peek()) {
-					case -1: throw ParseError("Unterminated object before end of file.");
+					case -1: throw ParseError("Unterminated object before end of json string.");
 					case ',':
 						Read();
 						break;
@@ -92,7 +135,7 @@ namespace FridayThe13th {
 			while (!complete) {
 				var c = Read();
 				switch (c) {
-					case -1: throw ParseError("Unterminated string before end of file.");
+					case -1: throw ParseError("Unterminated string before end of json string.");
 					case '"': complete = true; break;
 					case '\\':
 						var nc = Read();
