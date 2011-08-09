@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Dynamic;
+using System.Globalization;
 
 namespace FridayThe13th {
 	public class JsonParser {
@@ -65,8 +66,39 @@ namespace FridayThe13th {
 			return list;
 		}
 
-		protected dynamic ParseNumber() {
-			return 0;
+		//not very robust.... yet
+		////http://ecma262-5.com/ELS5_HTML.htm#Section_8.5
+		protected double ParseNumber() {
+			_sb.Clear();
+
+			bool doRead = true;
+			while (doRead) {
+				var c = Peek();
+				switch (c) {
+					case '.': case '-': case '+': case 'e': case 'E':
+						_sb.Append((char)c);
+						Read();
+						doRead = true;
+						break;
+					default:
+						if (c >= '0' && c <= '9') {
+							_sb.Append((char)c);
+							Read();
+							doRead = true;
+						} else
+							doRead = false;
+						break;
+				}
+			}
+
+			double number;
+			bool couldParse = Double.TryParse(_sb.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out number);
+			if (!couldParse) {
+				number = Double.NaN;
+				throw ParseError(string.Format("Could not parse {0} into a Double.", number));
+			}
+
+			return number;
 		}
 
 		protected dynamic ParseValue() {
@@ -79,6 +111,9 @@ namespace FridayThe13th {
 				case '"': return ParseString();
 				case '[': return ParseArray();
 				case '-': return ParseNumber();
+				case 't': if (TryRead("true")) { return true; } else { goto default; }
+				case 'f': if (TryRead("false")) { return false; } else { goto default; }
+				case 'n': if (TryRead("null")) { return null; } else { goto default; }
 				default:
 					if (c >= '0' && c <= '9')
 						return ParseNumber();
@@ -217,6 +252,17 @@ namespace FridayThe13th {
 					default: doRead = false; break;
 				}
 			} 
+		}
+
+		protected bool TryRead(string s) {
+			bool success = true;
+			for (var i = 0; i < s.Length; ++i)
+				if (s[i] != Read()) {
+					_index = _index - i - 1;
+					success = false;
+					break;
+				}
+			return success;
 		}
 
 		protected Exception ParseError(string msg) {

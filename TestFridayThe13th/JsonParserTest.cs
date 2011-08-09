@@ -92,6 +92,35 @@ namespace TestFridayThe13th
 			
 		}
 
+		[TestMethod()]
+		public void SimpleNumbersParseTest() {
+			var jsp = new JsonParser();
+			
+			//dynamic n =  jsp.Parse("[\"1.0\"]");
+			Assert.AreEqual(1.0,  jsp.Parse("1.0"));
+			Assert.AreEqual(-1.0, jsp.Parse("-1.0"));
+			Assert.AreEqual(1.0, jsp.Parse("1"));
+			Assert.AreEqual(-1.0, jsp.Parse("-1"));
+			Assert.AreEqual(4.5e10, jsp.Parse("4.5e10"));
+			Assert.AreEqual(-4.5e10, jsp.Parse("-4.5e10"));
+			Assert.AreEqual(99.0e-10, jsp.Parse("99.0e-10"));
+			Assert.AreEqual(-1.343424e-10, jsp.Parse("-1.343424e-10"));
+			Assert.AreEqual(4.5e10, jsp.Parse("4.5E10"));
+			Assert.AreEqual(-4.5e10, jsp.Parse("-4.5E10"));
+			Assert.AreEqual(99.0e-10, jsp.Parse("99.0E-10"));
+			Assert.AreEqual(4.5e10, jsp.Parse("4.5e+10"));
+			Assert.AreEqual(-4.5e10, jsp.Parse("-4.5e+10"));
+		}
+
+		[TestMethod()]
+		public void SimpleBooleanNullParseTest() {
+			var jsp = new JsonParser();
+
+			Assert.IsTrue(jsp.Parse("true"));
+			Assert.IsFalse(jsp.Parse("false"));
+			Assert.IsNull(jsp.Parse("null"));
+		}
+
 		/*[TestMethod()]
 		public void Parse2Test() {
 			var jsp = new JsonParser(Properties.Resources.example2);
