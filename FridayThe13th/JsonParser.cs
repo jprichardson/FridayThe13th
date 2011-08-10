@@ -16,7 +16,14 @@ namespace FridayThe13th {
 		private int _index = 0;
 		private StringBuilder _sb = new StringBuilder();
 
-		public JsonParser() { }
+		public JsonParser() { CamelizeProperties = false; ExceptionOnParsingError = false; }
+
+		public bool CamelizeProperties { get; set; }
+		public bool ExceptionOnParsingError { get; set; }
+
+		public int ErrorCount { get { return _errorMessages.Count; } }
+		private List<string> _errorMessages = new List<string>();
+		public IEnumerable<string> ErrorMessages { get { return _errorMessages; } }
 
 		public dynamic Parse(string json) {
 			Reset();
@@ -25,7 +32,8 @@ namespace FridayThe13th {
 		}
 
 		public void Reset() {
-			_index = 0; _line = 0; _column = 0;
+			_index =_line = _column = 0;
+			_errorMessages.Clear();
 			_jsonText = "";
 		}
 
@@ -38,7 +46,7 @@ namespace FridayThe13th {
 			while (doRead) {
 				ReadWhitespace();
 				switch (Peek()) {
-					case -1: throw ParseError("Unterminated array before end of json string.");
+					case -1: ParseError("Unterminated array before end of json string."); return list;
 					case ',':
 						Read();
 						break;
@@ -54,6 +62,55 @@ namespace FridayThe13th {
 			}
 
 			return list;
+		}
+
+		protected dynamic ParseObject() {
+			Read(); //read first {
+			ReadWhitespace();
+
+			dynamic obj = new JsonObject();
+
+			var doRead = true;
+			while (doRead) {
+				switch (Peek()) {
+					case -1: ParseError("Unterminated object before end of json string."); return obj;
+					case ',':
+						Read();
+						break;
+					case '}':
+						Read();
+						doRead = false;
+						break;
+					case '"':
+						var key = ParseString();
+						if (CamelizeProperties) {
+							_sb.Clear();
+							if (key.Contains('_')) {
+								var words = key.Split('_');
+								foreach (var w in words) {
+									_sb.Append(w.Substring(0, 1).ToUpper());
+									_sb.Append(w.Substring(1, w.Length - 1).ToLower());
+								}
+							} else {
+								_sb.Append(key.Substring(0, 1).ToUpper());
+								_sb.Append(key.Substring(1, key.Length - 1).ToLower());
+							}
+
+							key = _sb.ToString();
+						}
+						ReadWhitespace();
+						ReadExpect(':');
+						ReadWhitespace();
+						var val = ParseValue();
+						obj[key] = val;
+						break;
+					default:
+						ReadWhitespace();
+						break;
+				}
+			}
+
+			return obj;
 		}
 
 		//not very robust.... yet
@@ -85,73 +142,10 @@ namespace FridayThe13th {
 			bool couldParse = Double.TryParse(_sb.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out number);
 			if (!couldParse) {
 				number = Double.NaN;
-				throw ParseError(string.Format("Could not parse {0} into a Double.", number));
+				ParseError(string.Format("Could not parse {0} into a Double.", number));
 			}
 
 			return number;
-		}
-
-		protected dynamic ParseValue() {
-			ReadWhitespace();
-
-			var c = Peek();
-			switch (c) {
-				case -1: throw ParseError("Unknown parsing error. Premature end of json string.");
-				case '{': return ParseObject();
-				case '"': return ParseString();
-				case '[': return ParseArray();
-				case '-': return ParseNumber();
-				case 't': if (TryRead("true")) { return true; } else { goto default; }
-				case 'f': if (TryRead("false")) { return false; } else { goto default; }
-				case 'n': if (TryRead("null")) { return null; } else { goto default; }
-				default:
-					if (c >= '0' && c <= '9')
-						return ParseNumber();
-					else
-						throw ParseError("Unrecognized JSON character token.");
-			}
-		}
-
-		protected dynamic ParseObject() {
-			Read(); //read first {
-			ReadWhitespace();
-
-			dynamic obj = new JsonObject();
-			
-			/*var dict = (IDictionary<string, dynamic>)obj;
-			Func<bool> f = () => {
-				return dict.Keys.Count == 1; //created method IsEmpty() is a key as well
-			};
-			obj.IsEmpty = f;
-
-			
-			*/
-			var doRead = true;
-			while (doRead) {
-				switch (Peek()) {
-					case -1: throw ParseError("Unterminated object before end of json string.");
-					case ',':
-						Read();
-						break;
-					case '}':
-						Read();
-						doRead = false;
-						break;
-					case '"':
-						var key = ParseString();
-						ReadWhitespace();
-						ReadExpect(':');
-						ReadWhitespace();
-						var val = ParseValue();
-						obj[key] = val;
-						break;
-					default:
-						ReadWhitespace();
-						break;
-				}
-			}
-
-			return obj;
 		}
 
 		protected string ParseString() {
@@ -162,7 +156,7 @@ namespace FridayThe13th {
 			while (!complete) {
 				var c = Read();
 				switch (c) {
-					case -1: throw ParseError("Unterminated string before end of json string.");
+					case -1: ParseError("Unterminated string before end of json string."); return _sb.ToString();
 					case '"': complete = true; break;
 					case '\\':
 						var nc = Read();
@@ -191,7 +185,7 @@ namespace FridayThe13th {
 								ushort cp = 0;
 								for (int i = 0; i < 4; i++) {
 									if ((c = Read()) < 0)
-										throw ParseError("Incomplete unicode character escape literal");
+										ParseError("Incomplete unicode.");
 									cp *= 16;
 									if ('0' <= c && c <= '9')
 										cp += (ushort)(c - '0');
@@ -211,6 +205,30 @@ namespace FridayThe13th {
 			}
 
 			return _sb.ToString();
+		}
+
+		protected dynamic ParseValue() {
+			ReadWhitespace();
+
+			var c = Peek();
+			switch (c) {
+				case -1: ParseError("Unknown parsing error. Premature end of json string."); return null;
+				case '{': return ParseObject();
+				case '"': return ParseString();
+				case '[': return ParseArray();
+				case '-': return ParseNumber();
+				case 't': if (TryRead("true")) { return true; } else { goto default; }
+				case 'f': if (TryRead("false")) { return false; } else { goto default; }
+				case 'n': if (TryRead("null")) { return null; } else { goto default; }
+				default:
+					if (c >= '0' && c <= '9')
+						return ParseNumber();
+					else {
+						ParseError("Unrecognized JSON character token.");
+						Read(); //get rid of bad character, go to next
+						return ParseValue();
+					}
+			}
 		}
 
 		protected int Peek() {
@@ -238,10 +256,10 @@ namespace FridayThe13th {
 		protected void ReadExpect(char c) {
 			var expect = Read();
 			if (expect == -1)
-				throw ParseError(string.Format("Expected {0} but is at the end of the string.", c));
+				ParseError(string.Format("Expected {0} but is at the end of the string.", c));
 			else
 				if (expect != c)
-					throw ParseError(string.Format("Expected {0} but received {1}.", c, expect));
+					ParseError(string.Format("Expected {0} but received {1}.", c, expect));
 		}
 
 		protected void ReadWhitespace() {
@@ -270,8 +288,12 @@ namespace FridayThe13th {
 			return success;
 		}
 
-		protected Exception ParseError(string msg) {
-			return new Exception(string.Format("{0} ({1},{2})", msg, _line, _column));
+		protected void ParseError(string msg) {
+			msg = string.Format("{0} ({1},{2})", msg, _line, _column);
+			if (ExceptionOnParsingError)
+				throw new Exception(msg);
+			else
+				_errorMessages.Add(msg);
 		}
 
 	}

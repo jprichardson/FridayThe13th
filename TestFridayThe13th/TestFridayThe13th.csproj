@@ -74,6 +74,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\json_camelize.json" />
     <None Include="Resources\json_example1.json" />
     <None Include="Resources\json_example2.json" />
     <None Include="Resources\json_example3.json" />

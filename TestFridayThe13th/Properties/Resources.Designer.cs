@@ -62,6 +62,20 @@ namespace TestFridayThe13th.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///	&quot;user_name&quot;: &quot;JP&quot;,
+        ///	&quot;follower_count&quot;: 100,
+        ///	&quot;something&quot;, &quot;no_way&quot;,
+        ///	&quot;don&apos;t_do_it&quot;, &quot;ok&quot;
+        ///}.
+        /// </summary>
+        internal static string json_camelize {
+            get {
+                return ResourceManager.GetString("json_camelize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///    &quot;glossary&quot;: {
         ///        &quot;title&quot;: &quot;example glossary&quot;,
         ///		&quot;GlossDiv&quot;: {
@@ -177,7 +191,11 @@ namespace TestFridayThe13th.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [&quot;\u00f7&quot;].
+        ///   Looks up a localized string similar to {
+        ///	&quot;div&quot;: &quot;\u00f7&quot;,
+        ///	&quot;sigma&quot;: &quot;\u03A3&quot;,
+        ///	&quot;inf&quot;: &quot;\u101C&quot;
+        ///}.
         /// </summary>
         internal static string json_unicode {
             get {

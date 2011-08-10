@@ -206,6 +206,17 @@ namespace TestFridayThe13th
 			Assert.AreEqual("Σ", res.sigma);
 			Assert.AreEqual("လ", res.inf);
 		}
+
+		[TestMethod()]
+		public void CamelizeTest() {
+			var jsp = new JsonParser() { CamelizeProperties = true };
+			var res = jsp.Parse(Properties.Resources.json_camelize);
+
+			Assert.AreEqual("JP", res.UserName);
+			Assert.AreEqual(100.0, res.FollowerCount);
+			Assert.AreEqual("no_way", res.Something);
+			Assert.AreEqual("ok", res["Don'tDoIt"]);
+		}
 		
 	}
 }
