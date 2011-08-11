@@ -2,6 +2,7 @@ Usage
 =====
 
 Let's say that you have this JSON:
+	
 	{
 		"some_number": 108.541,
 		"date_time": "2011-04-13T15:34:09Z",
@@ -17,7 +18,7 @@ You can deserialize it like so:
 
 	var jsonText = File.ReadAllText("mydata.json");
 
-	var jsp = new JsonParser(){CamelizeProperties: true};
+	var jsp = new JsonParser(){CamelizeProperties = true};
 	dynamic json = jsp.Parse(jsonText);
 
 	Console.WriteLine(json.SomeNumber); //outputs 108.541
