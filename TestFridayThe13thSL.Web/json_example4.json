@@ -1,0 +1,31 @@
+﻿{"web-app": {
+  "servlet": [   
+    {
+      "servlet-class": "org.cofax.cds.CDSServlet",
+      "init-param": {
+        "configGlossary:adminEmail": "ksm@pobox.com",
+        "maxUrlLength": 500}},
+    {
+      "servlet-name": "cofaxEmail",
+      "init-param": {
+      "mailHost": "mail1",
+      "mailHostOverride": "mail2"}},
+    {
+      "servlet-name": "fileServlet",
+      "servlet-class": "org.cofax.cds.FileServlet"},
+    {
+      "servlet-name": "cofaxTools",
+      "servlet-class": "org.cofax.cms.CofaxToolsServlet",
+      "init-param": {
+        "templatePath": "toolstemplates/",
+        "log": 1,
+        "lookInContext": 1,
+        "adminGroupID": 4,
+        "betaServer": true}}],
+  "servlet-mapping": {
+    "cofaxCDS": "/",
+    "cofaxTools": "/tools/*"},
+ 
+  "taglib": {
+    "taglib-uri": "cofax.tld",
+    "taglib-location": "/WEB-INF/tlds/cofax.tld"}}}

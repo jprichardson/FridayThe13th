@@ -1,0 +1,10 @@
+﻿[
+        {"id": "Open"},
+        {"id": "OpenNew", "true": "Open New"},
+        null,
+        {"id": false},
+        {"id": "ZoomOut", "label": true},
+        true,
+        {"id": "Mute"},
+        null
+  ]

@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridayThe13thSL", "FridayThe13thSL\FridayThe13thSL.csproj", "{13ED57E0-C966-4433-A7BC-6C924801D26C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFridayThe13thSL", "TestFridayThe13thSL\TestFridayThe13thSL.csproj", "{ADF44FA5-C30F-41C0-8D0B-7B7C675E6C8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFridayThe13thSL.Web", "TestFridayThe13thSL.Web\TestFridayThe13thSL.Web.csproj", "{326E78E4-1245-4C3F-8534-99668E770C29}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FridayThe13th.vsmdi
@@ -35,6 +39,14 @@ Global
 		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13ED57E0-C966-4433-A7BC-6C924801D26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF44FA5-C30F-41C0-8D0B-7B7C675E6C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF44FA5-C30F-41C0-8D0B-7B7C675E6C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF44FA5-C30F-41C0-8D0B-7B7C675E6C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF44FA5-C30F-41C0-8D0B-7B7C675E6C8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326E78E4-1245-4C3F-8534-99668E770C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326E78E4-1245-4C3F-8534-99668E770C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326E78E4-1245-4C3F-8534-99668E770C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326E78E4-1245-4C3F-8534-99668E770C29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

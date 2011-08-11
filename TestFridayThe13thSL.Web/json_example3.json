@@ -1,0 +1,8 @@
+﻿{"widget": {
+    "debug": "on",
+    "window": {
+        "title": "Sample Konfabulator Widget",
+        "width": 500,
+        "height": 600
+    }
+}}    
